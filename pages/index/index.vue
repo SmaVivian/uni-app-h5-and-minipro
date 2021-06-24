@@ -1,46 +1,14 @@
 <template>
 	<view class="page-info">
-		<view class="sch">
-			<u-search
-				:show-action="false"
-				placeholder="输入要预约的博物馆名称"
-				v-model="queryParams.key"
-				@search="handleSearch"
-				@clear="queryParams.key=''"></u-search>
-		</view>
-
-		<!-- <view class="tabs">
-			<u-tabs :list="tabs" :is-scroll="false" :current="tabCurrent" font-size="32" bg-color="transparent" active-color="#000" inactive-color="#333" bar-width="80" @change="changeTab"></u-tabs>
-		</view> -->
-		<!-- <view class="u-margin-top-20 u-margin-bottom-20">博物馆列表 ？</view> -->
-		<view class="list">
-			<view class="item" v-for="(item, i) in dataList" :key="i" @click="goDetail(item)">
-				<view class="item-con">
-					<u-image width="180rpx" height="180rpx" border-radius="10" :src="item.museumUrl"></u-image>
-					<view class="info">
-						<view>
-							<view class="name">{{item.name}}</view>
-							<view class="center u-m-t-5">
-								<view v-show="item.level">
-									<u-tag :text="item.level" type="info" size="mini"></u-tag>
-								</view>
-								<view class="u-m-l-10" v-show="item.type">
-									<u-tag type="info" size="mini" :text="item.type"></u-tag>
-								</view>
-							</view>
-						</view>
-						<div class="bottom">
-							<span class="num">{{item.appointSum}}人已预约</span>
-						</div>
-					</view>
-				</view>
-
-				<view class="icon-box">
-					<u-icon name="arrow-right" color="#1677FF" size="28"></u-icon>
-				</view>
-			</view>
-		</view>
-		<u-loadmore :status="loadingType"></u-loadmore>
+		<!-- <u-swiper :list="list" height="300"></u-swiper> -->
+		<u-swiper :list="list" :effect3d="true" height="300" :autoplay="false"></u-swiper>
+		
+		<u-grid :col="3" class="model-box u-m-t-40">
+			<u-grid-item bg-color="transparent" v-for="i in 6">
+				<u-icon name="photo" :size="46"></u-icon>
+				<view class="grid-text">图片{{i}}</view>
+			</u-grid-item>
+		</u-grid>
 	</view>
 </template>
 
@@ -48,53 +16,25 @@
 	export default {
 		data() {
 			return {
-				// tabCurrent: 0,
-				// tabVal: '展讯',
-				// tabs: [{
-				// 	name: '展讯'
-				// }, {
-				// 	name: '活动'
-				// }, {
-				// 	name: '研究'
-				// }, {
-				// 	name: '资讯'
-				// }],
-				dataList: [],
-				loadingType: 'loadmore', // loadmore加载前 nomore没有更多了 loading正在加载中
-				queryParams: {
-					key: '',
-					currentPage: 1,
-					size: 10,
-				},
-				totalPage: 0,
+				list: [{
+						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
+						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
+					},
+					{
+						image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
+						title: '身无彩凤双飞翼，心有灵犀一点通'
+					},
+					{
+						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
+						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+					}
+				]
 			}
 		},
 		onLoad() {
 			this.getDataList()
 		},
-		//下拉刷新
-		onPullDownRefresh() {
-			this.dataList = []
-
-			this.queryParams.currentPage = 1
-			this.getDataList()
-		},
-		onReachBottom() {
-			if (this.queryParams.currentPage < this.totalPage) {
-				this.queryParams.currentPage++
-				this.getDataList()
-			}
-		},
 		methods: {
-			// changeTab(index) {
-			// 	this.tabCurrent = index
-			// 	this.tabVal = this.tabs[index].name
-
-			// 	this.dataList = []
-			// 	this.queryParams.currentPage = 1
-			// 	// this.loadingType = 'loading'
-			// 	this.getDataList()
-			// },
 			goDetail(item) {
 				this.$u.route({
 					url: '/pages/order/order-pre',
@@ -102,11 +42,6 @@
 						id: item.id
 					}
 				})
-			},
-			handleSearch() {
-				this.dataList = []
-				this.queryParams.currentPage = 1
-				this.getDataList()
 			},
 			getDataList(operate) {
 				this.loadingType = 'loading'
@@ -138,47 +73,21 @@
 <style lang="scss" scoped>
 	.page-info {
 		padding: 20rpx;
-
-		.list {
-			.item {
-				display: flex;
-				align-items: center;
-				padding: 20rpx;
-				margin-top: 20rpx;
-				box-shadow: 0px 6rpx 20rpx 0px rgba(173, 179, 191, 0.3);
-				border-radius: 16rpx;
-
-				.item-con {
-					flex: 1;
-					display: flex;
+		
+		.model-box {
+			background: #f5f5f5;
+			.u-grid-item {
+				height: 200rpx;
+				box-sizing: border-box;
+				padding: 20rpx 10px;
+				/deep/ .u-grid-item-box {
+					background-color: #fff;
 				}
-
-				.info {
-					width: 100%;
-					padding-left: 20rpx;
-					box-sizing: border-box;
-					display: flex;
-					flex-direction: column;
-					justify-content: space-around;
-					flex: 1;
-					font-size: 34rpx;
-					color: #000;
-
-					.center {
-						display: flex;
-					}
-
-					.bottom {
-						display: flex;
-						justify-content: space-between;
-						align-items: center;
-
-						.num {
-							font-size: 24rpx;
-							color: $u-tips-color;
-						}
-					}
-				}
+			}
+			.grid-text {
+				font-size: 28rpx;
+				margin-top: 4rpx;
+				color: $u-type-info;
 			}
 		}
 	}
