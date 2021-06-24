@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "我的预约",
+  "pullRefresh": false,
+  "allowsBounceVertical": "YES",
+  "usingComponents": {
+    "u-empty": "/uview-ui/components/u-empty/u-empty"
+  }
+}

@@ -1,0 +1,190 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "博物馆",
+				"enablePullDownRefresh": true,
+				"h5": {
+					"titleNView": false  // 去掉 H5 端页面原生导航栏
+				}
+				// 配置编译到 App平台时的特定样式，部分常用配置 H5 平台也支持。
+				// "app-plus": {
+				// 	"titleNView": {
+				// 		"type": "transparent"
+				// 	}
+				// }
+			}
+		}, {
+			"path": "pages/order/order-pre",
+			"style": {
+				// "navigationBarTitleText": "预约须知",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "预约",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "",
+				// "navigationBarTitleText": "我的",
+				"navigationStyle": "custom",
+				// 解决支付宝小程序自定义导航栏不生效
+				"mp-alipay": {
+					"allowsBounceVertical": "NO", //是否允许向下拉拽
+					"transparentTitle": "always",
+					"titlePenetrate": "YES"
+				}
+			}
+
+		}, {
+			"path": "pages/my/person-list",
+			"style": {
+				"navigationBarTitleText": "常用联系人",
+				"enablePullDownRefresh": false,
+				"mp-alipay": {
+					"allowsBounceVertical": "YES" //是否允许向下拉拽
+				}
+			}
+
+		}, {
+			"path": "pages/my/person-add",
+			"style": {
+				"navigationBarTitleText": "添加联系人",
+				"enablePullDownRefresh": false,
+				"mp-alipay": {
+					"allowsBounceVertical": "NO" //是否允许向下拉拽
+				}
+			}
+
+		}, {
+			"path": "pages/my/my-order",
+			"style": {
+				"navigationBarTitleText": "我的预约",
+				"enablePullDownRefresh": false,
+				"mp-alipay": {
+					"allowsBounceVertical": "YES" //是否允许向下拉拽
+				}
+			}
+
+		}, {
+			"path": "pages/order/order-res",
+			"style": {
+				"navigationBarTitleText": "预约结果",
+				"enablePullDownRefresh": false
+			}
+
+		}
+		// ,{
+		//        "path" : "pages/login/login",
+		//        "style" :                                                                                    
+		//        {
+		//            "navigationBarTitleText": "",
+		//            "enablePullDownRefresh": false
+		//        }
+		// }
+	],
+	"subPackages": [{
+		"root": "moduleA",
+		"pages": [{
+			"path": "query/query",
+			"style": {
+				"navigationBarTitleText": "核验",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "query/search",
+			"style": {
+				"navigationBarTitleText": "预约查询",
+				"enablePullDownRefresh": false
+			}
+
+		}]
+	}],
+	"condition": { //模式配置，仅开发期间生效
+		"current": 2, //当前激活的模式（list 的索引项）
+		"list": [{
+				"name": "特定页面", //模式名称 - 打开微信小程序-工具-编译配置-选择改name值
+				"path": "pages/order/order-pre", //启动页面，必选
+				"query": "id=1" //启动参数，在页面的onLoad函数里面得到。
+			},
+			{
+				"name": "预约", //模式名称 - 打开微信小程序-工具-编译配置-选择改name值
+				"path": "pages/order/order", //启动页面，必选
+				"query": "id=1&time=2021-05-10&settingTimesId=131&timesStr=09:00-12:00&museumName=某某博物馆" //启动参数，在页面的onLoad函数里面得到。
+			}, {
+				"name": "结果", //模式名称 - 打开微信小程序-工具-编译配置-选择改name值
+				"path": "pages/order/order-res", //启动页面，必选
+				"query": "pageType=1&orderId=39" //启动参数，在页面的onLoad函数里面得到。
+			},
+			{
+				"name": "联系人", //模式名称 - 打开微信小程序-工具-编译配置-选择改name值
+				"path": "pages/my/person-list", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到。
+			},
+			{
+				"name": "添加联系人", //模式名称 - 打开微信小程序-工具-编译配置-选择改name值
+				"path": "pages/my/person-add", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到。
+			},
+			{
+				"name": "扫码核验", //模式名称 - 打开微信小程序-工具-编译配置-选择改name值
+				"path": "moduleA/query/query", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到。
+			},
+			{
+				"name": "我的", //模式名称 - 打开微信小程序-工具-编译配置-选择改name值
+				"path": "pages/my/my", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到。
+			}
+			// {
+			// 	"name": "登录", //模式名称 - 打开微信小程序-工具-编译配置-选择改name值
+			// 	"path": "pages/login/login", //启动页面，必选
+			// 	"query": "" //启动参数，在页面的onLoad函数里面得到。
+			// }
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		// "navigationBarTitleText": "预约",
+		// 把navigationBarBackgroundColor属性不在支付宝小程序中使用就可以了，因为支付宝小程序文字颜色和标题前景色公用一个属性
+		// #ifdef MP-WEIXIN || H5
+		"navigationBarBackgroundColor": "#ffffff",
+		// #endif
+		"backgroundColor": "#ffffff"
+		// 原生导航栏不显示
+		// "app-plus": {
+		//   "titleNView": false
+		//   // "type": "transparent"
+		// }
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#007AFF",
+		"borderStyle": "black",
+		"backgroundColor": "#F8F8F8",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/menu-1.png",
+				"selectedIconPath": "static/menu-1-active.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"iconPath": "static/menu-2.png",
+				"selectedIconPath": "static/menu-2-active.png",
+				"text": "我的"
+			}
+		]
+	}
+}

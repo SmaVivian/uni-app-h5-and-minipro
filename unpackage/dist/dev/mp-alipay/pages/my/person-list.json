@@ -1,0 +1,9 @@
+{
+  "defaultTitle": "常用联系人",
+  "pullRefresh": false,
+  "allowsBounceVertical": "YES",
+  "usingComponents": {
+    "u-button": "/uview-ui/components/u-button/u-button",
+    "u-icon": "/uview-ui/components/u-icon/u-icon"
+  }
+}

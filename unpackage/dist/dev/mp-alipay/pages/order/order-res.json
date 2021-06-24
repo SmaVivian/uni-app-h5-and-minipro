@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "预约结果",
+  "pullRefresh": false,
+  "usingComponents": {
+    "u-image": "/uview-ui/components/u-image/u-image",
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
+}
