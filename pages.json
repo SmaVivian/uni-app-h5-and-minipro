@@ -12,10 +12,18 @@
 		{
 			"path": "pages/museum/museum",
 			"style": {
-				"navigationBarTitleText": "博物馆",
+				"navigationBarTitleText": "博物馆列表",
 				"enablePullDownRefresh": true
 			}
-		}, {
+		},
+		{
+			"path": "pages/list/list",
+			"style": {
+				"navigationBarTitleText": "瀑布流列表",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/order/order-pre",
 			"style": {
 				// "navigationBarTitleText": "预约须知",

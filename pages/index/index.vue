@@ -4,9 +4,9 @@
 		<u-swiper :list="list" :effect3d="true" height="300" :autoplay="false"></u-swiper>
 		
 		<u-grid :col="3" class="model-box u-m-t-40">
-			<u-grid-item bg-color="transparent" v-for="i in 6">
+			<u-grid-item bg-color="transparent" v-for="(item, i) in menus" @click="goDetail(i)">
 				<u-icon name="photo" :size="46"></u-icon>
-				<view class="grid-text">图片{{i}}</view>
+				<view class="grid-text">{{item}}</view>
 			</u-grid-item>
 		</u-grid>
 	</view>
@@ -28,7 +28,8 @@
 						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
 					}
-				]
+				],
+				menus: ['博物馆列表', '瀑布流', '', '', '', '']
 			}
 		},
 		onLoad() {
@@ -36,12 +37,24 @@
 		},
 		methods: {
 			goDetail(item) {
-				this.$u.route({
-					url: '/pages/order/order-pre',
-					params: {
-						id: item.id
-					}
-				})
+				switch(item) {
+					case 0:
+						this.$u.route({
+							url: '/pages/museum/museum'
+						})
+						break
+					case 1:
+						this.$u.route({
+							url: '/pages/list/list'
+						})
+						break
+				}
+				// this.$u.route({
+				// 	url: '/pages/order/order-pre',
+				// 	params: {
+				// 		id: item.id
+				// 	}
+				// })
 			},
 			getDataList(operate) {
 				this.loadingType = 'loading'
