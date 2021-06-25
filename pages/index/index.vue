@@ -29,7 +29,7 @@
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
 					}
 				],
-				menus: ['博物馆列表', '瀑布流', '', '', '', '']
+				menus: ['博物馆列表', '瀑布流', '登录', '', '', '']
 			}
 		},
 		onLoad() {
@@ -46,6 +46,11 @@
 					case 1:
 						this.$u.route({
 							url: '/pages/list/list'
+						})
+						break
+					case 2:
+						this.$u.route({
+							url: '/pages/login/login'
 						})
 						break
 				}
